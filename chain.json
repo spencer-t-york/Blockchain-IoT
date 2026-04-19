@@ -1,0 +1,52 @@
+[
+  {
+    "index": 0,
+    "timestamp": 1776567564.0039165,
+    "device_id": "pi-test",
+    "cert_hash": "abc123hash",
+    "status": "PENDING",
+    "admin_sig": null,
+    "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+    "hash": "1b58d49cd8d9fee862391595b4cf9bf764794d23c288100c18ad3acfeeca471e"
+  },
+  {
+    "index": 1,
+    "timestamp": 1776567581.6520193,
+    "device_id": "pi-test",
+    "cert_hash": "abc123hash",
+    "status": "PENDING",
+    "admin_sig": null,
+    "prev_hash": "1b58d49cd8d9fee862391595b4cf9bf764794d23c288100c18ad3acfeeca471e",
+    "hash": "256680050dc23eab49a44e2d1861d2de2776d4c4be95a7f15fdf9e1b908be910"
+  },
+  {
+    "index": 2,
+    "timestamp": 1776567593.059367,
+    "device_id": "pi-test",
+    "cert_hash": "abc123hash",
+    "status": "PENDING",
+    "admin_sig": null,
+    "prev_hash": "256680050dc23eab49a44e2d1861d2de2776d4c4be95a7f15fdf9e1b908be910",
+    "hash": "6984e00d19ac597f131dae337f6e3bd13bc5fc9f20a9032c468aad0a3762f198"
+  },
+  {
+    "index": 3,
+    "timestamp": 1776567593.0607765,
+    "device_id": "pi-test",
+    "cert_hash": "abc123hash",
+    "status": "APPROVED",
+    "admin_sig": "3450d79613e53e1e698ad99114f5cf79a16a5712e505d2b429e26d6ea1fb036e",
+    "prev_hash": "6984e00d19ac597f131dae337f6e3bd13bc5fc9f20a9032c468aad0a3762f198",
+    "hash": "1d4373bf27fad91c754f5dd48aef8332ac4b87226b843acc9f16578e052ccf12"
+  },
+  {
+    "index": 4,
+    "timestamp": 1776567593.0640256,
+    "device_id": "pi-test",
+    "cert_hash": "abc123hash",
+    "status": "APPROVED",
+    "admin_sig": "fakesig",
+    "prev_hash": "1d4373bf27fad91c754f5dd48aef8332ac4b87226b843acc9f16578e052ccf12",
+    "hash": "7aae86e80d33742effaa4de46de0bc96ef807d025c62a0093f252c485318dd60"
+  }
+]
