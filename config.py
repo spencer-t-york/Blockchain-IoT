@@ -1,17 +1,14 @@
-import hashlib, subprocess, socket
+from dotenv import load_dotenv
+import os, hashlib
 
-DEVICE_ID = socket.gethostname()  # pi1
+load_dotenv()
 
-PEERS = [
-    "192.168.40.74",  # pi2
-    "192.168.40.73",  # pi3
-]  # remove this Pi's own IP from the list
+DEVICE_ID    = os.getenv("DEVICE_ID")
+DEVICE_IP    = os.getenv("DEVICE_IP")
+MQTT_BROKERS = os.getenv("PEER_IPS").split(",")
+MQTT_PORT    = int(os.getenv("MQTT_PORT", 1883))
 
-GOSSIP_PORT = 5001
-ADMIN_PORT  = 5000
-MQTT_BROKER = "192.168.40.73"  # Pi3 runs mosquitto
-
-def get_cert_hash():
-    cert = open("/Blockchain-IoT/device.crt", "rb").read()
-    return hashlib.sha256(cert).hexdigest()
-ADMIN_KEY = "96dd7c00b6b94f7e2d193ef0ec3df095572323d2c8819a6c7df2446fb8023433"
+def get_token_hash():
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    token = open(os.path.join(base_dir, "identity.token"), "r").read().strip()
+    return hashlib.sha256(token.encode()).hexdigest()
