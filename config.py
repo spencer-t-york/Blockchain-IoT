@@ -5,7 +5,7 @@ load_dotenv()
 
 DEVICE_ID    = os.getenv("DEVICE_ID")
 DEVICE_IP    = os.getenv("DEVICE_IP")
-MQTT_BROKERS = os.getenv("PEER_IPS").split(",")
+MQTT_BROKERS = ["localhost"] + os.getenv("PEER_IPS").split(",")
 MQTT_PORT    = int(os.getenv("MQTT_PORT", 1883))
 
 def get_token_hash():
