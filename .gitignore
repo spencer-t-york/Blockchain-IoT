@@ -1,3 +1,4 @@
 .env
 identity.token
 chain.json
+__pycache__/
