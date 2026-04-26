@@ -1,7 +1,7 @@
 import time, os, atexit, socket
 from mqtt_client import start, publish_chain, publish_pending
 from chain import load_chain, get_device_status
-from config import DEVICE_ID
+from config import DEVICE_ID, MQTT_BROKERS, MQTT_PORT
 from led import set_led, cleanup
 
 
