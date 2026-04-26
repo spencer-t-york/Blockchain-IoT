@@ -1,28 +1,41 @@
-import time, os, atexit
+import time, os, atexit, socket
 from mqtt_client import start, publish_chain, publish_pending
 from chain import load_chain, get_device_status
 from config import DEVICE_ID
 from led import set_led, cleanup
 
+
 GENESIS_PI = "pi1"  # only this Pi has the genesis block
+
+
+def wait_for_network(host, port, interval=2):
+    print(f"[{DEVICE_ID}] Waiting for network...")
+    while True:
+        try:
+            socket.setdefaulttimeout(2)
+            socket.socket().connect((host, port))
+            print(f"[{DEVICE_ID}] Network ready")
+            return
+        except OSError:
+            time.sleep(interval)
+
 
 def boot():
     set_led("UNKNOWN")
     print(f"[{DEVICE_ID}] Booting — waiting for network...")
-    time.sleep(15)
+    wait_for_network(MQTT_BROKERS[0], MQTT_PORT)
 
-    # Start MQTT — subscribe first before doing anything
     start()
     print(f"[{DEVICE_ID}] MQTT started, waiting for chain...")
-    time.sleep(5)
 
-    chain = load_chain()
-
-    # Pi 1 — publish genesis chain so others can sync
     if DEVICE_ID == GENESIS_PI:
         print(f"[{DEVICE_ID}] Genesis node — publishing chain")
         publish_chain()
-        time.sleep(2)
+    else:
+        # Wait until chain actually arrives via MQTT
+        while not load_chain():
+            time.sleep(0.5)
+        print(f"[{DEVICE_ID}] Chain received")
 
     # Check own status
     chain = load_chain()

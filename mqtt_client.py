@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import json, time, random, os
+from led import set_led
 from chain import (load_chain, save_chain, is_chain_valid, add_block,
                    get_device_status, get_trusted_peers, validate_token,
                    count_votes, quorum_reached, already_voted)
@@ -26,6 +27,7 @@ def publish_pending():
     })
     client.publish(TOPIC_REGISTER, payload, retain=True)
     print(f"[{DEVICE_ID}] Published PENDING registration")
+    set_led("PENDING")
 
 def publish_vote(target_device_id):
     payload = json.dumps({
