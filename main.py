@@ -6,6 +6,7 @@ from config import DEVICE_ID
 GENESIS_PI = "pi1"  # only this Pi has the genesis block
 
 def boot():
+    set_led("UNKNOWN")
     print(f"[{DEVICE_ID}] Booting — waiting for network...")
     time.sleep(15)
 
@@ -26,16 +27,22 @@ def boot():
     chain = load_chain()
     status = get_device_status(DEVICE_ID, chain)
     print(f"[{DEVICE_ID}] Current status: {status}")
+    set_led(status)
 
     if status == "APPROVED":
         print(f"[{DEVICE_ID}] Already approved, joining network")
     else:
+        set_led("PENDING")
         print(f"[{DEVICE_ID}] Not approved, registering as PENDING")
         publish_pending()
 
     # Keep running
     print(f"[{DEVICE_ID}] Node running")
     while True:
+        # Poll own status every 5 seconds and update LED
+        chain = load_chain()
+        status = get_device_status(DEVICE_ID, chain)
+        set_led(status)
         time.sleep(1)
 
 if __name__ == "__main__":
