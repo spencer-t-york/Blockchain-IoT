@@ -1,7 +1,8 @@
-import time, os
+import time, os, atexit
 from mqtt_client import start, publish_chain, publish_pending
 from chain import load_chain, get_device_status
 from config import DEVICE_ID
+from led import set_led, cleanup
 
 GENESIS_PI = "pi1"  # only this Pi has the genesis block
 
