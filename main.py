@@ -33,18 +33,16 @@ def boot():
     if status == "APPROVED":
         print(f"[{DEVICE_ID}] Already approved, joining network")
     else:
-        set_led("PENDING")
         print(f"[{DEVICE_ID}] Not approved, registering as PENDING")
         publish_pending()
 
     # Keep running
     print(f"[{DEVICE_ID}] Node running")
     while True:
-        # Poll own status every 5 seconds and update LED
         chain = load_chain()
         status = get_device_status(DEVICE_ID, chain)
         set_led(status)
-        time.sleep(1)
+        time.sleep(5)
 
 if __name__ == "__main__":
     boot()
