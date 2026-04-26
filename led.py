@@ -4,6 +4,10 @@ _last_status = None
 
 def set_led(status, device_id=""):
     global _last_status
+
+    if status == "UNKNOWN" and _last_status == "PENDING":
+        return
+
     if status == _last_status:
         return
 
